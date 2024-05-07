@@ -1,0 +1,313 @@
+import { StatusBar } from "expo-status-bar";
+import { Text, View, Image, Button, Pressable, SafeAreaView } from "react-native";
+import * as React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import  Styles  from "./globalStyles";
+import { Video, ResizeMode } from "expo-av";
+
+const Stack = createNativeStackNavigator();
+
+function LoginScreen({navigation}) {
+	return (
+
+		<View style={Styles.container}>
+			<Image source={require("./assets/clearTellMe.png")}></Image>
+			<StatusBar style="auto" />
+			<Button
+				onPress={() => navigation.navigate("HomeScreen")}
+				title="Login"
+				color="#E37B5F"
+			/>
+		</View>
+	);
+}
+
+function HomeScreen({navigation}) {
+	const video = React.useRef(null);
+	const [status, setStatus] = React.useState({});
+	return (
+		<SafeAreaView style={Styles.appContainer}>
+			<View style={Styles.homeContainer}>
+				<Video
+					ref={video}
+					style={Styles.homeVideo}
+					source={require("./assets/buySnake.mp4")}
+					fullscreen={false}
+					useNativeControls={true}
+					resizeMode={ResizeMode.COVER}
+					shouldPlay={true}
+					isLooping={true}
+					onPlaybackStatusUpdate={status => setStatus(() => status)}
+				/>
+
+				<View style={Styles.navBar}>
+					<Button
+						onPress={() => navigation.navigate("HomeScreen")}
+						title="Home"
+						color="#E37B5F"
+					/>
+					<Pressable onPress={() => navigation.navigate("FollowUpScreen")}>
+						<Image
+							source = {require("./assets/followUpIcon.png")}
+							style={{width: 50, height: 50, opacity: .6}}
+						/>
+					</Pressable>
+					<Button
+						onPress={() => navigation.navigate("CreateScreen")}
+						title="+"
+						color="#E37B5F"
+					/>
+					<Pressable onPress={() => navigation.navigate("TopicsScreen")}>
+						<Image
+							source = {require("./assets/topicsIcon.png")}
+							style={{width: 50, height: 50, opacity: .6}}
+						/>
+					</Pressable>
+					<Pressable onPress={() => navigation.navigate("ProfileScreen")}>
+						<Image
+							source = {require("./assets/profileIcon.png")}
+							style={{width: 50, height: 50, opacity: .6}}
+						/>
+					</Pressable>
+				</View>
+			</View>
+		</SafeAreaView>
+	);
+}
+
+function ProfileScreen({navigation}) {
+
+	// const [userPosts, setUserPosts] = useState(7);
+	// const [userLikes, setUserLikes] = useState(2);
+	// const [userName, setUserName] = useState('lil_shrimpy');
+
+	return (
+		<View style={Styles.screenContainer}>
+			{/* <StatusBar style="auto" /> */}
+			<View style={Styles.userInfo}>
+				<View style={Styles.profPic}>
+					<Image source={require("./assets/sampleUser1.png")} style={{width: 130, height: 130, borderRadius:65}}></Image>
+				</View>
+
+				<View style={Styles.userName}>
+					<Text style={Styles.titleText}>@lil_shrimpy</Text>
+				</View>
+
+				<View style={Styles.profileStats}>
+					<View style={Styles.postLikes}>
+						<Text style={{fontSize: 20, fontWeight: "bold"}}>{0}</Text>
+						<Text style={{fontSize: 15, fontWeight: "bold", color: "#999"}}>Posts</Text>
+					</View>
+					<View>
+						{/* This is just here to space out the post and likes counts a bit */}
+					</View>
+					<View style={Styles.postLikes}>
+						<Text style={{fontSize: 20, fontWeight: "bold"}}>{0}</Text>
+						<Text style={{fontSize: 15, fontWeight: "bold", color: "#999"}}>Likes</Text>
+					</View>
+				</View>
+			</View>
+
+			<View style={Styles.profileMainContent}>
+				<View style={Styles.profileContentNav}>
+					<Pressable>
+						<Image
+							source = {require("./assets/userPostsIcon.png")}
+							style={{width: 40, height: 40}}
+						/>
+					</Pressable>
+					<Pressable >  
+						<Image
+							source = {require("./assets/heartIcon.png")}
+							style={{width: 40, height: 40, opacity: .6}}
+						/>
+					</Pressable>
+				</View>
+				<View style={Styles.profileVideos}>
+					<Text styles={Styles.titleText}>*Main Content*</Text>
+				</View>
+			</View>
+
+      
+
+			<View style={Styles.navBar}>
+				<Button
+					onPress={() => navigation.navigate("HomeScreen")}
+					title="Home"
+					color="#E37B5F"
+				/>
+				<Pressable onPress={() => navigation.navigate("FollowUpScreen")}>
+					<Image
+						source = {require("./assets/followUpIcon.png")}
+						style={{width: 50, height: 50, opacity: .6}}
+					/>
+				</Pressable>
+				<Button
+					onPress={() => navigation.navigate("CreateScreen")}
+					title="+"
+					color="#E37B5F"
+				/>
+				<Pressable onPress={() => navigation.navigate("TopicsScreen")}>
+					<Image
+						source = {require("./assets/topicsIcon.png")}
+						style={{width: 50, height: 50, opacity: .6}}
+					/>
+				</Pressable>
+				<Pressable onPress={() => navigation.navigate("ProfileScreen")}>
+					<Image
+						source = {require("./assets/profileIcon.png")}
+						style={{width: 50, height: 50}}
+					/>
+				</Pressable>
+			</View>
+		</View>
+	);
+}
+
+function FollowUpScreen({navigation}) {
+	return (
+		<View style={Styles.screenContainer}>
+			<View style={Styles.fillerSpace}>
+				<Text style={Styles.titleText}>Welcome to the Follow Up screen</Text>
+			</View>
+			<View style={Styles.navBar}>
+				<Button
+					onPress={() => navigation.navigate("HomeScreen")}
+					title="Home"
+					color="#E37B5F"
+				/>
+				<Pressable onPress={() => navigation.navigate("FollowUpScreen")}>
+					<Image
+						source = {require("./assets/followUpIcon.png")}
+						style={{width: 50, height: 50}}
+					/>
+				</Pressable>
+				<Button
+					onPress={() => navigation.navigate("CreateScreen")}
+					title="+"
+					color="#E37B5F"
+				/>
+				<Pressable onPress={() => navigation.navigate("TopicsScreen")}>
+					<Image
+						source = {require("./assets/topicsIcon.png")}
+						style={{width: 50, height: 50, opacity: .6}}
+					/>
+				</Pressable>
+				<Pressable onPress={() => navigation.navigate("ProfileScreen")}>
+					<Image
+						source = {require("./assets/profileIcon.png")}
+						style={{width: 50, height: 50, opacity: .6}}
+					/>
+				</Pressable>
+			</View>
+		</View>
+	);
+}
+
+function CreateScreen({navigation}) {
+	return (
+		<View style={Styles.screenContainer}>
+			<View style={Styles.fillerSpace}>
+				<Text style={Styles.titleText}>Welcome to the Create screen</Text>
+			</View>
+			<View style={Styles.navBar}>
+				<Button
+					onPress={() => navigation.navigate("HomeScreen")}
+					title="Home"
+					color="#E37B5F"
+				/>
+				<Pressable onPress={() => navigation.navigate("FollowUpScreen")}>
+					<Image
+						source = {require("./assets/followUpIcon.png")}
+						style={{width: 50, height: 50, opacity: .6}}
+					/>
+				</Pressable>
+				<Button
+					onPress={() => navigation.navigate("CreateScreen")}
+					title="+"
+					color="#E37B5F"
+				/>
+				<Pressable onPress={() => navigation.navigate("TopicsScreen")}>
+					<Image
+						source = {require("./assets/topicsIcon.png")}
+						style={{width: 50, height: 50, opacity: .6}}
+					/>
+				</Pressable>
+				<Pressable onPress={() => navigation.navigate("ProfileScreen")}>
+					<Image
+						source = {require("./assets/profileIcon.png")}
+						style={{width: 50, height: 50, opacity: .6}}
+					/>
+				</Pressable>
+			</View>
+		</View>
+	);
+}
+
+function TopicsScreen({navigation}) {
+	return (
+		<View style={Styles.screenContainer}>
+			<View style={marginTop=10}>
+				<Text style={Styles.titleText}>*Search Bar Here*</Text>
+			</View>
+			<View style={Styles.fillerSpace}>
+				<Text style={Styles.titleText}>Welcome to the Topics screen</Text>
+			</View>
+			<View style={Styles.navBar}>
+				<Button
+					onPress={() => navigation.navigate("HomeScreen")}
+					title="Home"
+					color="#E37B5F"
+				/>
+				<Pressable onPress={() => navigation.navigate("FollowUpScreen")}>
+					<Image
+						source = {require("./assets/followUpIcon.png")}
+						style={{width: 50, height: 50, opacity: .6}}
+					/>
+				</Pressable>
+				<Button
+					onPress={() => navigation.navigate("CreateScreen")}
+					title="+"
+					color="#E37B5F"
+				/>
+				<Pressable onPress={() => navigation.navigate("TopicsScreen")}>
+					<Image
+						source = {require("./assets/topicsIcon.png")}
+						style={{width: 50, height: 50}}
+					/>
+				</Pressable>
+				<Pressable onPress={() => navigation.navigate("ProfileScreen")}>
+					<Image
+						source = {require("./assets/profileIcon.png")}
+						style={{width: 50, height: 50, opacity: .6}}
+					/>
+				</Pressable>
+			</View>
+		</View>
+	);
+}
+
+export default function App() {
+	const user = {
+		userName: "lil_shrimpy",
+		profilePic: "./assets/sampleUser1.png",
+		postCount: 7,
+		likeCount: 2,
+	};
+
+
+  
+	return (
+		<NavigationContainer>{
+			<Stack.Navigator initialRouteName='LoginScreen' screenOptions={{ animation: "none", headerBackVisible: false}}>
+				<Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }}/>
+				<Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }}/>
+				<Stack.Screen name="ProfileScreen" component={ProfileScreen} options={{ headerShown: false }}/>
+				<Stack.Screen name="FollowUpScreen" component={FollowUpScreen} options={{ headerShown: false }}/>
+				<Stack.Screen name="CreateScreen" component={CreateScreen} options={{ headerShown: false }}/>
+				<Stack.Screen name="TopicsScreen" component={TopicsScreen} options={{ headerShown: false }}/>
+			</Stack.Navigator>
+		}</NavigationContainer>
+	);
+}

@@ -1,0 +1,7 @@
+run these commands: 
+
+npm install --save-dev jest
+
+npx jest testing/user.test.js replacing the name of the test file 
+or
+npx jest testing to run all
